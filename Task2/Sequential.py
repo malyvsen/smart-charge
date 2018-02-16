@@ -73,14 +73,14 @@ def placeStations():
     if s.numStationsAt > 0:
       continue
 
-    s.numStationsAt++
-    totalPlacedStations++
+    s.numStationsAt += 1
+    totalPlacedStations += 1
 
 
 
 
 
-def placeStationsOnRoute(Route route, int numStationsToPlace):
+def placeStationsOnRoute(route, numStationsToPlace):
   targetDistBetweenStations = route.length / numStationsToPlace
   prevDistAlong = 0
   for s in route.stations:
@@ -90,8 +90,8 @@ def placeStationsOnRoute(Route route, int numStationsToPlace):
       continue
     if s.distAlongRoute - prevDistAlong >= targetDistBetweenStations:
       # place a station, it's just about time
-      s.numStationsAt++
-      totalPlacedStations++
+      s.numStationsAt += 1
+      totalPlacedStations += 1
       prevDistAlong = s.distAlongRoute
 
   # we might be left with some stations to place now - just put them wherever
@@ -106,7 +106,7 @@ def placeStationsOnRoute(Route route, int numStationsToPlace):
 
 
 
-def programScore(List<Route> routes):
+def programScore(routes):
   result = 0
   for route in routes:
     result += greatestDistanceOnRoute(route)
@@ -114,9 +114,9 @@ def programScore(List<Route> routes):
 
 
 
-def greatestDistanceOnRoute (Route route):
-  long result = 0
-  long prevDistAlong = 0
+def greatestDistanceOnRoute (route):
+  result = 0
+  prevDistAlong = 0
   for s in route.stations:
     if s.numStationsAt > 0:
       result = Math.max(result, s.distAlongRoute - prevDistAlong)
